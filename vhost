@@ -190,7 +190,7 @@ vhost-remove() {
     echo-yellow "Removing $URL from /etc/hosts."
     sed -i '/'$URL'/d' /etc/hosts
 
-    echo-yellow "Desativando e deletando $CONFNAME virtual host."
+    echo-yellow "Disabling and deleting $CONFNAME virtual host."
     a2dissite $CONFNAME
 
     rm "/etc/apache2/sites-available/$CONFNAME"
