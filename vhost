@@ -4,40 +4,40 @@
 # GLOBAL VARIABLES (in script)                                                 #
 # ---------------------------------------------------------------------------- #
 
-# Nome do vhost que sera criado
+# Vhost name to be created
 NAME="${!#}"
 
-# nome padrao para os arquivos de configuraçao
+# Default name for configuration files
 CONFNAME="$NAME.conf"
 
-# Email do webmaster do virtualhost
+# Virtualhost webmaster email
 EMAIL="webmaster@localhost"
 
-# Email do webmaster do virtualhost
+# Default path to log files
 LOGPATH="\${APACHE_LOG_DIR}"
 
-# URL do virtual host
+# URL of the virtual host
 URL=""
 
 # System port to be used by the application
 PORT=""
 
-# pasta dos arquivos
+# Files folder
 WEBROOT=""
 
-# Template padrao para o vhost apache
+# Default template for vhost apache
 TEMPLATE="/etc/vhost/template.conf"
 
-# Template padrao para a pool do php5-fpm
+# Default template for the php5-fpm pool
 POOL_TEMPLATE="/etc/vhost/pool-template.conf"
 
-# Se sera gerado um vhost com php5-fpm
+# Whether to generate a vhost with php5-fpm
 HAS_POOL_TEMPLATE="0"
 
-# red output
+# Red output
 RED='\033[0;31m'
 
-# green output
+# Green output
 GREEN='\033[0;32m'
 
 # Yellow outpu
@@ -51,21 +51,21 @@ NC='\033[0m'
 # ---------------------------------------------------------------------------- #
 
 #
-# Echoes a red message
+# Echos a red message
 #
 echo-red() {
     echo -e "${RED}$1${NC}"
 }
 
 #
-# Echoes a green message
+# Echos a green message
 #
 echo-green() {
     echo -e "${GREEN}$1${NC}"
 }
 
 #
-# Echoes a yellow message
+# Echos a yellow message
 #
 echo-yellow() {
     echo -e "${YELLOW}$1${NC}"
@@ -81,6 +81,7 @@ vhost-credits() {
     cat <<splash
 Vhost Manager v1.2.0 Created by Rubens Fernandes <rubensdrk@gmail.com>
     php-fm support by Reinaldo A. C. Rauch <reinaldorauch@gmail.com>
+    Edited by Marco Bier <mrfibunacci@gmail.com>
 splash
     echo -e "${NC}"
 
@@ -106,7 +107,7 @@ vhost-usage() {
     echo -e "${YELLOW}"
     cat <<"USAGE"
 
-Uso: vhost [options] <name of vhost>
+Use: vhost [options] <name of vhost>
     -h|--help   help
     -url        url local of the project eg: site.dev
     -rm         remove a vhost and delete from /etc/hosts
@@ -186,7 +187,7 @@ vhost-remove() {
     vhost-verify-sudo;
     FPM_POOL_CONF="/etc/php5/fpm/pool.d/$CONFNAME"
 
-    echo-yellow "Removendo $URL de /etc/hosts."
+    echo-yellow "Removing $URL from /etc/hosts."
     sed -i '/'$URL'/d' /etc/hosts
 
     echo-yellow "Desativando e deletando $CONFNAME virtual host."
@@ -196,7 +197,7 @@ vhost-remove() {
     service apache2 reload
 
     if [ -f "$FPM_POOL_CONF" ]; then
-        echo-yellow "Desativando pool do php5-fpm"
+        echo-yellow "Disabling php5-fpm pool"
         rm "$FPM_POOL_CONF"
         service php5-fpm reload
     fi
@@ -394,4 +395,3 @@ vhost-add-url;
 vhost-enable-reload;
 
 exit 0
-
