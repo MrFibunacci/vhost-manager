@@ -77,3 +77,9 @@ To autoupdate
 ```sh
 $ sudo vhost -update
 ```
+
+# Feature Ideas
+
+- [ ] simple way to get change and error logs
+- [ ] simple way to change path of logs
+- [ ] edit data in file without having to recreate it
