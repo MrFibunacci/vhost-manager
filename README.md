@@ -8,6 +8,7 @@ First install script
 ```sh
 $ git clone https://github.com/rubensfernandes/vhost-manager.git
 $ cd vhost-manager
+$ sudo chmod 777 vhost
 $ sudo ./vhost -install
 ```
 
